@@ -15,7 +15,7 @@ export function UploadButton({
   onUploadError,
 }: UploadButtonProps) {
   return (
-    <UTUploadButton<OurFileRouter>
+    <UTUploadButton<OurFileRouter, keyof OurFileRouter>
       endpoint={endpoint}
       onClientUploadComplete={(res) => {
         const urls = res?.map((r) => r.url) ?? []

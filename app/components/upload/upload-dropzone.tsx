@@ -15,7 +15,7 @@ export function UploadDropzone({
   onUploadError,
 }: UploadDropzoneProps) {
   return (
-    <UTUploadDropzone<OurFileRouter>
+    <UTUploadDropzone<OurFileRouter, keyof OurFileRouter>
       endpoint={endpoint}
       onClientUploadComplete={(res) => {
         const urls = res?.map((r) => r.url) ?? []
