@@ -52,23 +52,23 @@
     - [X] Initialize prisma
     - [X] Set up database schema
     - [X] Generate Prisma client
-  - [ ] PostgreSQL database:
+  - [X] PostgreSQL database:
     - Set up local PostgreSQL
     - Create database
     - Configure connection string
-  - [ ] NextAuth.js beta for authentication:
+  - [X] NextAuth.js beta for authentication:
     - Install next-auth beta
     - Configure auth options
     - Set up providers
-  - [ ] Stripe for payments:
+  - [X] Stripe for payments:
     - Install stripe packages
     - Set up API keys
     - Create payment utilities
 
 ### 2. Database and Authentication [ ]
 
-- [ ] Set up PostgreSQL database
-- [ ] Configure Prisma schema:
+- [X] Set up PostgreSQL database
+- [X] Configure Prisma schema:
   - User model
   - Product model
   - Category model
@@ -76,10 +76,23 @@
   - Review model
   - Cart model
 - [ ] Implement NextAuth.js authentication:
-  - Email/Password
-  - OAuth providers (Google, GitHub)
-  - JWT handling
-  - Protected routes
+  - [X] Set up auth configuration:
+    - [X] Create auth options file
+    - [X] Configure Prisma adapter
+    - [X] Set up JWT configuration
+  - [X] Implement authentication providers:
+    - [X] Email/Password provider
+    - [X] Google OAuth provider
+    - [X] GitHub OAuth provider
+  - [X] Create authentication utilities:
+    - [X] Sign in/out functions
+    - [X] Session management
+    - [X] Protected route middleware
+  - [X] Set up authentication UI:
+    - [X] Sign in page
+    - [X] Sign up page
+    - [X] Password reset flow
+    - [X] Email verification
 
 ### 3. Core Features - Customer Side [ ]
 
