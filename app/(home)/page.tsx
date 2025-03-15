@@ -1,5 +1,4 @@
-import { Carousel } from "@/components/ui/carousel"
-import { ProductCard } from "@/components/product/product-card"
+import { CarouselWrapper, ProductGrid } from "@/components/home/client-components"
 import { prisma } from "@/lib/prisma"
 
 export default async function HomePage() {
@@ -40,16 +39,12 @@ export default async function HomePage() {
   return (
     <div className="container py-8">
       <section className="mb-12">
-        <Carousel items={banners} />
+        <CarouselWrapper items={banners} />
       </section>
 
       <section>
         <h2 className="mb-6 text-2xl font-bold">Latest Products</h2>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {latestProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        <ProductGrid products={latestProducts} />
       </section>
     </div>
   )

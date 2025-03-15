@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { formatPrice } from "@/lib/utils"
 import { useCart } from "@/hooks/use-cart"
 import { Product, Category } from "@prisma/client"
+import { Star } from "lucide-react"
 
 interface ProductCardProps {
   product: Product & {
@@ -20,44 +21,46 @@ export function ProductCard({ product }: ProductCardProps) {
   const image = product.images[0] || "/placeholder.png"
 
   return (
-    <Card className="overflow-hidden">
+    <Card className="group overflow-hidden">
       <Link href={`/products/${product.id}`}>
         <div className="relative aspect-square">
           <Image
             src={image}
             alt={product.name}
             fill
-            className="object-cover transition-transform hover:scale-105"
+            className="object-cover transition-transform group-hover:scale-105"
           />
-          {product.category && (
-            <Badge
-              variant="secondary"
-              className="absolute left-2 top-2"
-            >
-              {product.category.name}
-            </Badge>
+          {product.stock === 0 && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+              <Badge variant="destructive">Out of Stock</Badge>
+            </div>
           )}
         </div>
       </Link>
       <CardContent className="p-4">
         <Link href={`/products/${product.id}`}>
           <h3 className="mb-2 text-lg font-semibold">{product.name}</h3>
+          <p className="mb-2 text-sm text-muted-foreground line-clamp-2">
+            {product.description}
+          </p>
+          <div className="mb-2 flex items-center gap-1">
+            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+            <span className="text-sm">
+              {product.ratings.toFixed(1)} ({product.numReviews} reviews)
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-lg font-bold">
+              ${product.price.toFixed(2)}
+            </span>
+            <Badge variant="secondary">{product.category.name}</Badge>
+          </div>
         </Link>
-        <p className="mb-2 text-sm text-muted-foreground line-clamp-2">
-          {product.description}
-        </p>
-        <div className="flex items-center justify-between">
-          <p className="text-lg font-bold">{formatPrice(product.price)}</p>
-          {product.stock > 0 ? (
-            <p className="text-sm text-green-600">In Stock</p>
-          ) : (
-            <p className="text-sm text-red-600">Out of Stock</p>
-          )}
-        </div>
       </CardContent>
       <CardFooter className="p-4 pt-0">
         <Button
           className="w-full"
+          disabled={product.stock === 0}
           onClick={() => addItem({ 
             id: product.id,
             name: product.name,
@@ -65,9 +68,8 @@ export function ProductCard({ product }: ProductCardProps) {
             image: image,
             quantity: 1 
           })}
-          disabled={product.stock === 0}
         >
-          Add to Cart
+          {product.stock === 0 ? "Out of Stock" : "Add to Cart"}
         </Button>
       </CardFooter>
     </Card>
